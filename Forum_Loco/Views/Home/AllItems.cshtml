@@ -1,0 +1,44 @@
+﻿@using System.Web.Mvc.Html;
+
+@model IEnumerable<Forum_Loco.Models.Product>
+
+    @{Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+    <style>
+        .container {
+            max-width: 100%;
+            padding: 0;
+        }
+    </style>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+<div class="alert-danger">@ViewBag.Error</div> }
+else
+{ <!----div style="background-image:url('../../Images/banner.jpg');background-size:contain;border-bottom:solid;" > Welcome to the Ontario's smallest online shopping website!</!----div-->
+                <div class="p-2 m-3">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+        <div class="col-sm-3 mb-2">
+            <div class="card p-1" style="height:380px" id="productcard">
+                <div class="card-img text-center">
+                    @{ var img = item.ProductId + ".jpg";}
+                    <img src="~/Images/@img" height="100" />
+                </div>
+                <div class="card-header text-center">
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </div>
+                <div class="font-weight-bold text-center" style="font-size:large">
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </div>
+                <div class="card-body text-center">
+                    $ @Html.DisplayFor(modelItem => item.Price) <br />
+                </div>
+                <div class="card-footer text-center">
+                    @Html.ActionLink("Details", "Details", "Product", new { id = item.ProductId }, new { @class = "btn btn-info stretched-link" })
+                </div>
+            </div>
+        </div>}
+                    </div>
+                </div>}

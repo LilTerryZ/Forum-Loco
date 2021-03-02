@@ -1,0 +1,17 @@
+﻿@using System.Web.Mvc.Html;
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Forum Loco</title>
+</head>
+<body style="margin-left: auto; margin-right: auto;text-align: center; background-color:gray">
+    <div style="font-size:x-large; margin:20%">
+
+        @Html.ActionLink("Browse Products", "AllItems", new { @class = "list-group-item list-group-item-action" })
+        <br />
+        @Html.ActionLink("Sign in", "../Account/Login", new { @class = "list-group-item list-group-item-action" })
+
+    </div>
+</body>
+</html>

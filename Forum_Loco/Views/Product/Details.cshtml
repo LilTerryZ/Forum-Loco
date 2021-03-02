@@ -1,0 +1,58 @@
+﻿@model Forum_Loco.Models.ProductViewModel
+
+@{ViewBag.Title = "Details";}
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    @if (Model.Product != null)
+    {
+<dl class="dl-horizontal">
+    <div class="col-md-4">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.ProductName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.BrandName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.BrandName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd>
+            $@Html.DisplayFor(model => model.Product.Price)
+        </dd>
+    </div>
+    @if (Model.ItemRequest != null)
+    {
+<div class="col-md-2">
+    @using (Html.BeginForm("AddItems", "Cart", FormMethod.Post))
+    {
+<div class="form-horizontal">
+    <span>Add @Model.Product.ProductName to cart?</span>
+    @Html.HiddenFor(model => model.ItemRequest.CartId)
+    @Html.HiddenFor(model => model.ItemRequest.ProductId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.ItemRequest.Count, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.ItemRequest.Count, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+</div>
+                        <input type="submit" value="Add to Cart" class="btn btn-primary" />                    }
+</div>}
+</dl> }
+            else
+            {
+<div>No product information available.</div>}
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+

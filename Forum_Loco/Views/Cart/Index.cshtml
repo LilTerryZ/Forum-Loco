@@ -1,0 +1,66 @@
+﻿@using Forum_Loco.Models;
+@model Forum_Loco.Models.Cart
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+
+@if (Model == null || Model.CartItems == null || Model.CartItems.Count == 0)
+{
+    <h3>No items in cart.</h3>
+} else {
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Amount</th>
+            <th>Cost</th>
+        </tr>
+
+        @foreach (CartProduct item in Model.CartItems)
+        {
+            if (item.Products != null)
+            {
+                <tr>
+                    <td>
+                        @item.Products.ProductName (@Html.ActionLink("Link", "Details", "Product", new { id = item.Products.ProductId }, null))
+                    </td>
+                    <td>
+                        @item.Products.BrandName
+                    </td>
+                    <td>
+                        @item.Count
+                    </td>
+                    <td>
+                        @{ double cost = item.Count * item.Products.Price; }
+                        $@cost
+                    </td>
+                    <td>
+                        @if (Model != null)
+                        {
+                            @Html.ActionLink("Remove", "Delete", new { id = item.Products.ProductId })
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="3">Total:</td>
+            <td>
+                @{ 
+                    double total = 0.00;
+                    foreach (CartProduct cp in Model.CartItems)
+                    {
+                        if (cp.Count > 0 && cp.Products != null)
+                        {
+                            total += cp.Count * cp.Products.Price;
+                        }
+                    }
+                }
+                $@total
+            </td>
+        </tr>
+    </table>
+}

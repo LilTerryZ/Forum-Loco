@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Loco</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="//unpkg.com/bootstrap-select-country@4.0.0/dist/css/bootstrap-select-country.min.css" type="text/css" />
+    <style>
+        button:focus, btn:focus {
+            outline: none !important;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="navbar-brand">
+                    <span><i class="fa fa-shopping-cart"></i></span>
+                    Forum Loco
+                </div>
+                <ul class="nav navbar-nav col-md-6">
+                    <li class="nav-item col-12">
+                    </li>
+                </ul>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item @ViewBag.home"><a href="/" class="nav-link" style="background-color:red; color:black">Home <i class="fa fa-home"></i></a></li>
+                        <li class="nav-item @ViewBag.order"><a href="/User/Myorders" class="nav-link" style="background-color:forestgreen; color:black">My Orders<i class="fa fa-shopping-bag"></i></a></li>
+                        <li class="nav-item @ViewBag.cart"><a href="/Cart/Index" class="nav-link" style="background-color:deeppink; color:black">My Cart <i class="fa fa-shopping-cart"></i></a></li>
+                        @if (Session["UserId"] != null)
+                        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hi @Session["Username"]<i class="fa fa-user"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -30px;">
+                    <a class="dropdown-item" href="/@Session["Role"]/Settings">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/User/Logout">Logout <i class="fa fa-sign-out"></i></a>
+                </div>
+            </li>
+ }
+        else
+        {
+<li class="nav-item"><a href="/Account/Login" class="nav-link" style="background-color:yellow; color:black">Login <i class="fa fa-sign-in"></i></a></li>
+}
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <footer class="text-center mb-0">
+            <p>&copy; @DateTime.Now.Year -  Two beer and a whisky</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
+
+
+</body>
+</html>
